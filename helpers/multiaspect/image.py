@@ -83,11 +83,14 @@ class MultiaspectImage:
 
         # Calculate new size
         if resolution_type == "pixel":
-            (target_width, target_height, new_aspect_ratio) = (
-                MultiaspectImage.calculate_new_size_by_pixel_edge(
-                    original_width, original_height, resolution
-                )
-            )
+            target_width = original_width
+            target_height = original_height
+            new_aspect_ratio = original_width / original_height
+            # (target_width, target_height, new_aspect_ratio) = (
+            #     MultiaspectImage.calculate_new_size_by_pixel_edge(
+            #         original_width, original_height, resolution
+            #     )
+            # )
         elif resolution_type == "area":
             original_aspect_ratio = MultiaspectImage.calculate_image_aspect_ratio(
                 (original_width, original_height)
