@@ -1053,6 +1053,8 @@ def main():
     training_luminance_values = []
     current_epoch_step = None
 
+    
+
     for epoch in range(first_epoch, args.num_train_epochs + 1):
         if current_epoch > args.num_train_epochs:
             # This might immediately end training, but that's useful for simply exporting the model.
@@ -1111,9 +1113,9 @@ def main():
             args,
             validation_prompts,
             validation_shortnames,
-            0,
-            0,
-            0,
+            global_step,
+            resume_global_step,
+            step,
             text_encoder_1,
             tokenizer=None,
             vae_path=vae_path,
