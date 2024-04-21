@@ -1104,6 +1104,30 @@ def main():
                 continue
             train_backends[backend_id] = backend["train_dataloader"]
 
+        log_validations(
+            accelerator,
+            prompt_handler,
+            unet,
+            args,
+            validation_prompts,
+            validation_shortnames,
+            0,
+            0,
+            0,
+            text_encoder_1,
+            tokenizer=None,
+            vae_path=vae_path,
+            weight_dtype=weight_dtype,
+            embed_cache=StateTracker.get_default_text_embed_cache(),
+            validation_negative_pooled_embeds=validation_negative_pooled_embeds,
+            validation_negative_prompt_embeds=validation_negative_prompt_embeds,
+            text_encoder_2=text_encoder_2,
+            tokenizer_2=None,
+            ema_unet=ema_unet,
+            vae=vae,
+            SCHEDULER_NAME_MAP=SCHEDULER_NAME_MAP,
+        )
+
         for step, batch in random_dataloader_iterator(train_backends):
             if args.lr_scheduler == "cosine_with_restarts":
                 scheduler_kwargs["step"] = global_step
